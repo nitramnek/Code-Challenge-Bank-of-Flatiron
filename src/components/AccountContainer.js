@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import TransactionsList from "./TransactionsList";
-import Search from "./Search";
 import AddTransactionForm from "./AddTransactionForm";
 
 function AccountContainer() {
+  const [transactions, setTransactions] = useState([]);
+
+  const handleTransactionAdded = (newTransaction) => {
+    setTransactions((prevTransactions) => [...prevTransactions, newTransaction]);
+  };
+
   return (
     <div>
-      <Search />
-      <AddTransactionForm />
-      <TransactionsList />
+      <AddTransactionForm onTransactionSubmit={handleTransactionAdded} />
+      <TransactionsList initialTransactions={transactions} />
     </div>
   );
 }
